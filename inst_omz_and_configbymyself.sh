@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#安装zsh
+apt update
+apt install zsh
+
 #安装oh my zsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
