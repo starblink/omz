@@ -10,7 +10,9 @@ rm -f $HOME/.zshrc*
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 #退出shell,以便安装下面的插件
-exit
+# exit
+
+#ctrl+d
 
 #安装zsh-autosuggestions插件
 git clone git://github.com/zsh-users/zsh-autosuggestions $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
