@@ -17,4 +17,5 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-
 
 mv ubuntu_zshrc $HOME/.zshrc
 
-chsh -s /usr/bin/zsh
+source $HOME/.zshrc
+
