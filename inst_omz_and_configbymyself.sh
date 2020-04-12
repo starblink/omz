@@ -17,7 +17,7 @@ sed -i 's/fg=8/fg=10/' $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-a
 #安装zsh-autosuggestions插件
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
-cp ./ubuntu_zshrc $HOME/.zshrc
+cp $HOME/omz/ubuntu_zshrc $HOME/.zshrc
 
 cd
 source $HOME/.zshrc
