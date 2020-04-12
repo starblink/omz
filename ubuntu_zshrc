@@ -120,8 +120,5 @@ zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias vi='vim'
-alias pc='/usr/bin/proxychains'
 alias s='screen -ls'
-alias d='cd /home/kt/lede'
-alias wo='cd /works/openwrt'
 
