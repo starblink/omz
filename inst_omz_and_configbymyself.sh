@@ -8,7 +8,7 @@ apt install -y zsh
 rm -rf $HOME/.oh-my-zsh
 rm -f $HOME/.zshrc*
 
-curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh |bash
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" && exit
 
 #安装zsh-autosuggestions插件
 git clone git://github.com/zsh-users/zsh-autosuggestions $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
