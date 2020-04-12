@@ -5,6 +5,7 @@ apt update
 apt install -y zsh
 
 #安装oh my zsh
+rm -rf $HOME/.oh-my-zsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 
