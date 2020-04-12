@@ -26,3 +26,5 @@ cp $HOME/omz/ubuntu_zshrc $HOME/.zshrc
 cd
 source $HOME/.zshrc
 
+exit
+
