@@ -122,3 +122,10 @@ zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 alias vi='vim'
 alias s='screen -ls'
 
+#tmux
+alias tnew='tmux new -s'
+alias t='tmux ls'
+alias ta='tmux a -t'
+alias tk='tmux kill-session -t'
+
+
