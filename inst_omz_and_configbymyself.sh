@@ -1,5 +1,3 @@
-#!/bin/bash
-
 #安装zsh
 apt update
 apt install -y zsh
