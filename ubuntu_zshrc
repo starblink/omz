@@ -105,6 +105,7 @@ VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 VI_MODE_SET_CURSOR=true
 
 source $ZSH/oh-my-zsh.sh
+ZSH_CUSTOM=${ZSH_CUSTOM:-/$(whoami)/.oh-my-zsh/custom}
 source $ZSH_CUSTOM/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 autoload -Uz bracketed-paste-magic
