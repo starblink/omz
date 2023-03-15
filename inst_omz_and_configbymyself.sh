@@ -17,6 +17,9 @@ sed -i 's/fg=8/fg=10/' ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autos
 rm -rf ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
+#为vi-mode插件设置 快捷键 ^d ^y ^o ^k
+sed -i -e '/bindkey .* end-of-line/{n;N;/delete-char/!r ./bindkeys-for-vi-mode.txt' -e '}' ~/.oh-my-zsh/plugins/vi-mode/vi-mode.plugin.zsh
+
 cp ~/omz/ubuntu_zshrc ~/.zshrc
 
 source ~/.zshrc
