@@ -1,96 +1,3 @@
-# man context highlight
-export LESS_TERMCAP_mb=$'\E[01;31m'       # begin blinking
-export LESS_TERMCAP_md=$'\E[01;38;5;74m'  # begin bold
-export LESS_TERMCAP_me=$'\E[0m'           # end mode
-export LESS_TERMCAP_se=$'\E[0m'           # end standout-mode
-export LESS_TERMCAP_so=$'\E[38;5;246m'    # begin standout-mode - info box
-export LESS_TERMCAP_ue=$'\E[0m'           # end underline
-export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
-
-[[ -n `find /private/var/log/asl -type f -name "*.asl"` ]] && sudo rm -f /private/var/log/asl/*.asl
-
-#custom alias
-alias ls='gls'
-alias ll='gls -l'
-alias cut='gcut'
-alias shuf='gshuf'
-alias sort='gsort'
-alias seq='gseq'
-#alias grep='ggrep --color'
-alias tree='tree -C'
-alias mysql='mysql -uroot -p123456'
-alias xargs='gxargs'
-alias find='gfind'
-alias date='gdate'
-alias vi='/usr/local/bin/nvim'
-#alias vi='/opt/local/bin/nvim'
-alias vim='/usr/bin/vim'
-alias git='LANG=en_US.UTF-8 git'
-alias s='screen -ls'
-
-#tmux
-if [ ! "$TMUX" = "" ]; then export TERM=xterm-256color; fi
-
-alias tnew='tmux new -s'
-alias t='tmux ls'
-alias ta='tmux a -t'
-alias tk='tmux kill-session -t'
-
-#my custom define
-alias o='/Users/mop/Documents/docs/o.sh'
-alias d='cd /Users/mop/Downloads'
-alias c='open /Users/mop/Documents'
-alias m='open /Users/mop'
-alias a='open /Applications'
-
-alias pa='ping -c 1 alihk |grep from;ping -c 1 cc |grep from;ping -c 1 ghk |grep from'
-
-alias pc='proxychains4'
-alias st='open -a st'
-
-alias sedsed='/usr/local/bin/sedsed.py '
-
-
-#alias 'rm'="trash"
-#alias 'rm -rf'="trash"
-
-#wife on and off
-alias wfa='networksetup -setairportpower en0 on'
-alias wfb='networksetup -setairportpower en0 off'
-alias wf='wfb && sleep 1 && wfa'
-#wireguard
-alias ua='wg-quick up alihk'
-alias da='wg-quick down alihk'
-old_dns=$(networksetup -getdnsservers Wi-Fi)
-alias uc='wg-quick up cc && networksetup -setmanual Wi-Fi 192.168.1.201 255.255.255.0 192.168.1.1 && sudo networksetup -setdnsservers Wi-Fi 8.8.4.4'
-alias dc='wg-quick down cc && sudo networksetup -setdnsservers Wi-Fi $old_dns'
-
-alias sd='networksetup -setmanual Wi-Fi 192.168.1.201 255.255.255.0 192.168.1.1 && sudo networksetup -setdnsservers Wi-Fi 192.168.1.1'
-alias sm='networksetup -setmanual Wi-Fi 192.168.1.201 255.255.255.0 192.168.1.254 && sudo networksetup -setdnsservers Wi-Fi 192.168.1.254'
-alias sm253='networksetup -setmanual Wi-Fi 192.168.1.201 255.255.255.0 192.168.1.253 && sudo networksetup -setdnsservers Wi-Fi 192.168.1.253'
-
-#extract urls from chrome tabs
-#alias eurlt='osascript -e "set o to\"\"" -e "tell app \"google chrome\" -e "repeat with t in tabs of window 1" -e "set o to o&url of t &" | "& title of t & linefeed" -e "end" -e "end"'
-#alias eurl='osascript -e "set text item delimiters to linefeed" -e "tell app\"google chrome\"to url of tabs of window 1 as text"'
-function eurlt(){
-#osascript -e{'set o to""','tell app"google chrome"','repeat with t in tabs of window 1','set o to o&url of t&" | "&title of t&linefeed',end,end}|sed '$d'
-osascript << EOF | sed '$d'
-set o to ""
-tell app "google chrome"
-repeat with t in tabs of window 1
-set o to o & url of t & " | " & title of t & linefeed
-end
-end
-EOF
-}
-function eurl(){
-#osascript -e{'set text item delimiters to linefeed','tell app"google chrome"to url of tabs of window 1 as text'}
-osascript << EOF
-set text item delimiters to linefeed
-tell app "google chrome" to url of tabs of window 1 as text
-EOF
-}
-
 #In case you use zsh, you should add this line: bindkey \^U backward-kill-line to your .zshrc
 bindkey \^U backward-kill-line
 
@@ -114,64 +21,44 @@ zle -N forward-kill-dir
 bindkey '^k' forward-kill-dir
 bindkey -M vicmd '^k' forward-kill-dir
 
-#
-#bindkey -M emacs '^P' history-substring-search-up
-#bindkey -M emacs '^N' history-substring-search-down
-
 # If you come from bash you might have to change your $PATH.
-
-#export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-#export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
-export PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
-export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
-export PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"
-export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
-export PATH="/usr/local/opt/make/libexec/gnubin:$PATH"
-
-
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$PATH:/usr/local/go/bin
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-export PATH=$PATH:/usr/local/sbin
-export PATH=$PATH:/opt/local/bin:/opt/local/sbin
-
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_152.jdk/Contents/Home
-export SCALA_HOME=/Users/mop/develop/Library/scala/scala-2.11.8
-export M2_HOME=/Users/mop/develop/maven/apache-maven-3.3.9
-export PATH=$PATH:$JAVA_HOME/bin:$SCALA_HOME/bin:$M2_HOME/bin
-export CLASSPATH=$JAVA_HOME/lib/tools.jar:$JAVA_HOME/lib/dt.jar:.
-
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 #ZSH_THEME="robbyrussell"
 ZSH_THEME="agnoster"
-#ZSH_THEME="powerlevel9k/powerlevel9k"
 
-DEFAULT_USER="mop"     #增加这一项，可以隐藏掉路径前面那串用户名
-
-
-# Set list of themes to load
-# Setting this variable when ZSH_THEME=random
-# cause zsh load theme from this variable instead of
-# looking in ~/.oh-my-zsh/themes/
-# An empty array have no effect
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
+# If set to an empty array, this variable will have no effect.
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
 
+# Uncomment the following line to automatically update without prompting.
+# DISABLE_UPDATE_PROMPT="true"
+
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS=true
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -192,54 +79,45 @@ DEFAULT_USER="mop"     #增加这一项，可以隐藏掉路径前面那串用�
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
-HIST_STAMPS="yyyy-mm-dd"
-
-setopt no_nomatch
-#Do not enter command lines into the history list if they are duplicates of the previous event.
-#setopt HIST_IGNORE_DUPS
-
-# Do not display a line previously found.
-# setopt HIST_FIND_NO_DUPS
-
-# Delete old recorded entry if new entry is a duplicate.
-# setopt HIST_IGNORE_ALL_DUPS
-
-# Don't write duplicate entries in the history file.
-#setopt HIST_SAVE_NO_DUPS
-
-
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Which plugins would you like to load?
+# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
 z
-zsh-autosuggestions
-#history-substring-search
-zsh-syntax-highlighting
 vi-mode
+zsh-autosuggestions
+zsh-syntax-highlighting
 )
 
 #for vi-mode plgin
 VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 VI_MODE_SET_CURSOR=true
 
-
 source $ZSH/oh-my-zsh.sh
+source $ZSH_CUSTOM/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+autoload -Uz bracketed-paste-magic
+zle -N bracketed-paste bracketed-paste-magic
+source $ZSH_CUSTOM/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
 # User configuration
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
-#export LC_ALL=en_US.UTF-8  
-#export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -251,9 +129,6 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -263,14 +138,13 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-source $ZSH_CUSTOM/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-#source $ZSH/plugins/history-substring-search/history-substring-search.zsh
+alias vi='vim'
+alias s='screen -ls'
 
-autoload -Uz bracketed-paste-magic
-zle -N bracketed-paste bracketed-paste-magic
-source $ZSH_CUSTOM/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-zstyle ':bracketed-paste-magic' active-widgets '.self-*'
+#tmux
+alias tnew='tmux new -s'
+alias t='tmux ls'
+alias ta='tmux a -t'
+alias tk='tmux kill-session -t'
 
-#禁用brew每次安装软件都先自动更新
-export HOMEBREW_NO_AUTO_UPDATE=true
-
+TZ='Asia/Shanghai'; export TZ
