@@ -7,19 +7,6 @@ bindkey -M vicmd '^a' beginning-of-line
 bindkey -M vicmd 'L' end-of-line
 bindkey -M vicmd '^e' end-of-line
 bindkey -M vicmd '^w' backward-kill-word
-bindkey '^d' delete-char
-bindkey '^y' backward-word
-bindkey '^o' forward-word
-bindkey -M vicmd '^d' delete-char
-bindkey -M vicmd '^y' backward-word
-bindkey -M vicmd '^o' forward-word
-forward-kill-dir () {
-    local WORDCHARS=${WORDCHARS/\/}
-    zle kill-word
-}
-zle -N forward-kill-dir
-bindkey '^k' forward-kill-dir
-bindkey -M vicmd '^k' forward-kill-dir
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
